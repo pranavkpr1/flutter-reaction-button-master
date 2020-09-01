@@ -1,6 +1,6 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
+import 'package:flutter_reaction_button/src/play_sound.dart';
 import 'reactions_position.dart';
 import 'reactions_box.dart';
 import 'reaction.dart';
@@ -84,6 +84,7 @@ class _FlutterReactionButtonCheckState
         highlightColor: widget.highlightColor,
         splashColor: widget.splashColor,
         onTap: () {
+          SoundUtility.playSound('short_press_like.mp3');
           _onClickReactionButton();
         },
         onLongPress: () {
@@ -118,6 +119,7 @@ class _FlutterReactionButtonCheckState
   void _showReactionButtons(BuildContext context) async {
     final buttonOffset = _buttonKey.getButtonOffset();
     final buttonSize = _buttonKey.getButtonSize();
+    SoundUtility.playSound('box_up.mp3');
     final reactionButton = await Navigator.of(context).push(
       PageRouteBuilder(
         opaque: false,
@@ -148,4 +150,6 @@ class _FlutterReactionButtonCheckState
       _selectedReaction = reaction;
     });
   }
+
+
 }

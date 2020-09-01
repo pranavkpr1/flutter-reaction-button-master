@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:flutter_reaction_button/src/play_sound.dart';
 import 'reactions_box_item.dart';
 import 'reactions_position.dart';
 import 'reaction.dart';
@@ -87,7 +87,8 @@ class _ReactionsBoxState extends State<ReactionsBox>
   @override
   Widget build(BuildContext context) => GestureDetector(
         // Hide box when clicking out
-        onTap: () => _scaleController.reverse(),
+        onTap: () { _scaleController.reverse();
+        SoundUtility.playSound('box_down.mp3');},
         child: Container(
           height: double.infinity,
           color: Colors.transparent,
@@ -109,6 +110,12 @@ class _ReactionsBoxState extends State<ReactionsBox>
                             .map(
                               (reaction) => ReactionsBoxItem(
                                 onReactionClick: (reaction) {
+
+                                  SoundUtility.playSound('icon_choose.mp3');
+
+                                  if(reaction.reactionSoundEffect)
+                                    SoundUtility.playSound('bell.mp3');
+
                                   _selectedReaction = reaction;
                                   _scaleController.reverse();
                                 },

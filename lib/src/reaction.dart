@@ -15,12 +15,15 @@ class Reaction {
 
   final String reactionText;
 
+  bool reactionSoundEffect=false;
+
 
   Reaction({
     this.id,
     this.previewIcon,
     @required this.icon,
     @required this.reactionText,
+    this.reactionSoundEffect,
     this.enabled = true,
   }) {
     assert(reactionText != null);
