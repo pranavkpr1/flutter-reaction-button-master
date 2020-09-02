@@ -119,6 +119,7 @@ class _FlutterReactionButtonCheckState
   void _showReactionButtons(BuildContext context) async {
     final buttonOffset = _buttonKey.getButtonOffset();
     final buttonSize = _buttonKey.getButtonSize();
+
     SoundUtility.playSound('box_up.mp3');
     final reactionButton = await Navigator.of(context).push(
       PageRouteBuilder(

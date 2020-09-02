@@ -101,6 +101,7 @@ class _ReactionsBoxState extends State<ReactionsBox>
                   child: Transform.scale(
                     scale: _scale,
                     child: Card(
+                      margin: const EdgeInsets.only(left: 3.0, right: 3.0),
                       color: widget.color,
                       elevation: widget.elevation,
                       shape: RoundedRectangleBorder(
@@ -146,7 +147,7 @@ class _ReactionsBoxState extends State<ReactionsBox>
                   : _getBottomPosition();
 
   double _getTopPosition() =>
-      widget.buttonOffset.dy - widget.buttonSize.height * 3.3;
+      widget.buttonOffset.dy - widget.buttonSize.height ;
 
   double _getBottomPosition() =>
       widget.buttonOffset.dy + widget.buttonSize.height;
