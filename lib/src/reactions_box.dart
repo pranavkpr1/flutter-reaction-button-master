@@ -134,7 +134,7 @@ class _ReactionsBoxState extends State<ReactionsBox>
                       )),
                     ),
                   ),
-                    SizedBox(height:14,width:double.infinity)
+                    //SizedBox(height:14,width:double.infinity)
                   ])
                 ),
               ),
