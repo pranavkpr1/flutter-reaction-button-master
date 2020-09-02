@@ -97,7 +97,7 @@ class _ReactionsBoxState extends State<ReactionsBox>
             alignment: Alignment.center,
             children: <Widget>[
               Positioned(
-                top: _getPosition(context),
+                bottom: _getPosition(context),
                 child: GestureDetector(
                   child: Transform.scale(
                     scale: _scale,
