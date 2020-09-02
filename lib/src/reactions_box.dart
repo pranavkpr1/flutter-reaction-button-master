@@ -87,7 +87,8 @@ class _ReactionsBoxState extends State<ReactionsBox>
   @override
   Widget build(BuildContext context) => GestureDetector(
         // Hide box when clicking out
-        onTap: () { _scaleController.reverse();
+        onTap: () {
+          _scaleController.reverse();
         SoundUtility.playSound('box_down.mp3');},
         child: Container(
           height: double.infinity,
@@ -101,11 +102,13 @@ class _ReactionsBoxState extends State<ReactionsBox>
                   child: Transform.scale(
                     scale: _scale,
                     child: Card(
-                      margin: const EdgeInsets.only(left: 3.0, right: 3.0),
                       color: widget.color,
                       elevation: widget.elevation,
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(widget.radius)),
+                      child: Padding(
+                        padding: EdgeInsets.only(left:5.0, right:5.0),
+
                       child: Wrap(
                         children: widget.reactions
                             .map(
@@ -126,7 +129,7 @@ class _ReactionsBoxState extends State<ReactionsBox>
                               ),
                             )
                             .toList(),
-                      ),
+                      )),
                     ),
                   ),
                 ),
@@ -139,8 +142,7 @@ class _ReactionsBoxState extends State<ReactionsBox>
   double _getPosition(BuildContext context) =>
       (_getTopPosition() - widget.buttonSize.height * 2 < 0)
           ? _getBottomPosition()
-          : (_getBottomPosition() + widget.buttonSize.height * 2 >
-                  context.getScreenSize().height)
+          : (_getBottomPosition() + widget.buttonSize.height * 2 > context.getScreenSize().height)
               ? _getTopPosition()
               : widget.position == Position.TOP
                   ? _getTopPosition()
