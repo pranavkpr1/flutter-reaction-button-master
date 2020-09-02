@@ -38,7 +38,7 @@ class _ReactionsBoxItemState extends State<ReactionsBoxItem>
     _scaleController =
         AnimationController(vsync: this, duration: Duration(milliseconds: 100));
 
-    final Tween<double> startTween = Tween(begin: 1, end: 1.75);
+    final Tween<double> startTween = Tween(begin: 1, end: 1.8);
     _scaleAnimation = startTween.animate(_scaleController)
       ..addListener(() {
         setState(() {
@@ -72,6 +72,7 @@ class _ReactionsBoxItemState extends State<ReactionsBoxItem>
             splashColor: widget.splashColor,
             highlightColor: widget.highlightColor,
             child: widget.reaction.previewIcon,
+
           ),
         ),
       );

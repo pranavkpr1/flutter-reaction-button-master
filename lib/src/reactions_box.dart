@@ -100,7 +100,8 @@ class _ReactionsBoxState extends State<ReactionsBox>
                 top: _getPosition(context),
                 left:_getXPosition(),
                 child: GestureDetector(
-                  child: Transform.scale(
+                  child: Column(children: <Widget>[
+                    Transform.scale(
                     scale: _scale,
                     child: Card(
                       color: widget.color,
@@ -133,6 +134,8 @@ class _ReactionsBoxState extends State<ReactionsBox>
                       )),
                     ),
                   ),
+                    SizedBox(height:14,width:double.infinity)
+                  ])
                 ),
               ),
             ],
@@ -152,7 +155,7 @@ class _ReactionsBoxState extends State<ReactionsBox>
                   : _getBottomPosition();
 
   double _getTopPosition() =>
-      widget.buttonOffset.dy ;
+      widget.buttonOffset.dy- widget.buttonSize.height;
 
   double _getBottomPosition() =>
       widget.buttonOffset.dy + widget.buttonSize.height;
