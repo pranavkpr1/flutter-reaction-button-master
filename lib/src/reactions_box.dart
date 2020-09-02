@@ -97,7 +97,7 @@ class _ReactionsBoxState extends State<ReactionsBox>
             alignment: Alignment.center,
             children: <Widget>[
               Positioned(
-                top: _getPosition(context),
+                top: _getYPosition(context),
                 left:_getXPosition(),
                 child: GestureDetector(
                   child: Column(children: <Widget>[
@@ -134,7 +134,7 @@ class _ReactionsBoxState extends State<ReactionsBox>
                       )),
                     ),
                   ),
-                    //SizedBox(height:14,width:double.infinity)
+                    SizedBox(height:14)
                   ])
                 ),
               ),
@@ -143,10 +143,10 @@ class _ReactionsBoxState extends State<ReactionsBox>
         ),
       );
 
-  double _getXPosition() => widget.buttonOffset.dx+widget.buttonSize.width-10;
+  double _getXPosition() => widget.buttonOffset.dx+widget.buttonSize.width-20;
 
-  double _getPosition(BuildContext context) =>
-      (_getTopPosition() - widget.buttonSize.height * 3 < 0)
+  double _getYPosition(BuildContext context) =>
+      (_getTopPosition() - widget.buttonSize.height * 4 < 0)
           ? _getBottomPosition()
           : (_getBottomPosition() + widget.buttonSize.height * 2 > context.getScreenSize().height)
               ? _getTopPosition()
