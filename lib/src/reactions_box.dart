@@ -97,7 +97,8 @@ class _ReactionsBoxState extends State<ReactionsBox>
             alignment: Alignment.center,
             children: <Widget>[
               Positioned(
-                bottom: _getPosition(context),
+                top: _getPosition(context),
+                left:_getXPosition(),
                 child: GestureDetector(
                   child: Transform.scale(
                     scale: _scale,
@@ -107,7 +108,7 @@ class _ReactionsBoxState extends State<ReactionsBox>
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(widget.radius)),
                       child: Padding(
-                        padding: EdgeInsets.only(left:5.0, right:5.0),
+                        padding: EdgeInsets.only(left:8.0, right:8.0),
 
                       child: Wrap(
                         children: widget.reactions
@@ -138,6 +139,8 @@ class _ReactionsBoxState extends State<ReactionsBox>
           ),
         ),
       );
+
+  double _getXPosition() => widget.buttonOffset.dx+widget.buttonSize.width;
 
   double _getPosition(BuildContext context) =>
       (_getTopPosition() - widget.buttonSize.height * 2 < 0)
