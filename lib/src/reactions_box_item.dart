@@ -100,7 +100,7 @@ class _ReactionsBoxItemState extends State<ReactionsBoxItem>
               });
             },
             onTap: () {
-              _scaleController.reverse();
+              _scaleController.forward();
               setState(() {
                 _iconInFocus=true;
               });
@@ -128,7 +128,7 @@ class _ReactionsBoxItemState extends State<ReactionsBoxItem>
               setState(() {
                 _iconInFocus=false;
               });
-              _scaleController.forward();
+              _scaleController.reverse();
             },
             onTapCancel: () {
               setState(() {
@@ -157,7 +157,7 @@ class _ReactionsBoxItemState extends State<ReactionsBoxItem>
 
              ]),
                 //push focus icon above
-                margin: _iconInFocus && SoundUtility.reactionId==widget.reaction.id?EdgeInsets.only(bottom:13):EdgeInsets.only(bottom:0),
+                margin: _iconInFocus && SoundUtility.reactionId==widget.reaction.id?EdgeInsets.only(bottom:14):EdgeInsets.only(bottom:0),
             ),
 
           ),

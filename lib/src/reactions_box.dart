@@ -101,7 +101,49 @@ class _ReactionsBoxState extends State<ReactionsBox>
                 left:_getXPosition(),
                 child: GestureDetector(
                   child: Column(children: <Widget>[
-                    Transform.scale(
+                    Container(
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(widget.radius),
+                        border: Border.all(color: Colors.grey[300], width: 0.3),
+                        boxShadow: [
+                          BoxShadow(
+                              color: Colors.grey,
+                              blurRadius: 5.0,
+                              // LTRB
+                              offset: Offset.lerp(Offset(0.0, 0.0), Offset(0.0, 0.5), 10.0)),
+                        ],
+                      ),
+                      child: Padding(
+                          padding: EdgeInsets.only(left:8.0, right:8.0),
+
+                          child: Wrap(
+                            children: widget.reactions
+                                .map(
+                                  (reaction) => ReactionsBoxItem(
+                                onReactionClick: (reaction) {
+
+                                  SoundUtility.playSound('icon_choose.mp3');
+
+                                  if(reaction.reactionSoundEffect)
+                                    SoundUtility.playSound('bell.mp3');
+
+                                  _selectedReaction = reaction;
+                                  _scaleController.reverse();
+                                },
+                                splashColor: widget.splashColor,
+                                highlightColor: widget.highlightColor,
+                                reaction: reaction,
+                              ),
+
+                            )
+                                .toList(),
+                          )),
+                      height: 60,
+                      width:300,
+
+                    )
+                   /* Transform.scale(
                     scale: _scale,
                     child: Card(
                       color: widget.color,
@@ -135,7 +177,7 @@ class _ReactionsBoxState extends State<ReactionsBox>
                       )
                       ),
                     ),
-                  ),
+                  ),*/
                     //SizedBox(height:14)
                   ])
                 ),
