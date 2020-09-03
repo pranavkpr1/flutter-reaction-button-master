@@ -60,14 +60,14 @@ class _ReactionsBoxItemState extends State<ReactionsBoxItem>
         ignoring: !widget.reaction.enabled,
         child: Transform.scale(
           scale: _scale,
-          child: InkWell(
-            /*onHorizontalDragUpdate: (DragUpdateDetails dragUpdateDetail){
+          child: GestureDetector(
+            onHorizontalDragUpdate: (DragUpdateDetails dragUpdateDetail){
               _scaleController.forward();
               SoundUtility.playSound('icon_focus.mp3');
               setState(() {
                 _iconInFocus=true;
               });
-            },*/
+            },
            /* onHorizontalDragStart: (DragStartDetails dragUpdateDetail){
               _scaleController.forward();
               SoundUtility.playSound('icon_focus.mp3');
@@ -92,13 +92,13 @@ class _ReactionsBoxItemState extends State<ReactionsBoxItem>
                 });
               }
             },*/
-            onFocusChange: (value){
+           /* onFocusChange: (value){
               _scaleController.forward();
               SoundUtility.playSound('icon_focus.mp3');
               setState(() {
                 _iconInFocus=true;
               });
-            },
+            },*/
 
             onTapDown: (_) {
               setState(() {
