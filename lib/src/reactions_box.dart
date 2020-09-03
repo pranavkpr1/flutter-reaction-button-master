@@ -109,7 +109,7 @@ class _ReactionsBoxState extends State<ReactionsBox>
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(widget.radius)),
                       child: Padding(
-                        padding: EdgeInsets.only(left:8.0, right:8.0),
+                        padding: EdgeInsets.only(left:8.0, right:8.0, bottom:7),
 
                       child: Wrap(
                         children: widget.reactions
@@ -134,7 +134,7 @@ class _ReactionsBoxState extends State<ReactionsBox>
                       )),
                     ),
                   ),
-                    SizedBox(height:14)
+                    //SizedBox(height:14)
                   ])
                 ),
               ),
@@ -146,7 +146,7 @@ class _ReactionsBoxState extends State<ReactionsBox>
   double _getXPosition() => widget.buttonOffset.dx+widget.buttonSize.width-20;
 
   double _getYPosition(BuildContext context) =>
-      (_getTopPosition() - widget.buttonSize.height * 4 < 0)
+      (_getTopPosition() - widget.buttonSize.height * 3 < 0)
           ? _getBottomPosition()
           : (_getBottomPosition() + widget.buttonSize.height * 2 > context.getScreenSize().height)
               ? _getTopPosition()
