@@ -61,6 +61,20 @@ class _ReactionsBoxItemState extends State<ReactionsBoxItem>
         child: Transform.scale(
           scale: _scale,
           child: GestureDetector(
+            onHorizontalDragUpdate: (DragUpdateDetails dragUpdateDetail){
+              _scaleController.forward();
+              SoundUtility.playSound('icon_focus.mp3');
+              setState(() {
+                _iconInFocus=true;
+              });
+            },
+            onHorizontalDragStart: (DragStartDetails dragUpdateDetail){
+              _scaleController.forward();
+              SoundUtility.playSound('icon_focus.mp3');
+              setState(() {
+                _iconInFocus=true;
+              });
+            },
             onTap: () {
               _scaleController.reverse();
               setState(() {
@@ -68,13 +82,7 @@ class _ReactionsBoxItemState extends State<ReactionsBoxItem>
               });
               widget.onReactionClick(widget.reaction);
             },
-              onHorizontalDragUpdate: (DragUpdateDetails dragUpdateDetail){
-                _scaleController.forward();
-                SoundUtility.playSound('icon_focus.mp3');
-                setState(() {
-                  _iconInFocus=true;
-                });
-              },
+
             /*onHover:(value){
               if(value) {
                 _scaleController.forward();
