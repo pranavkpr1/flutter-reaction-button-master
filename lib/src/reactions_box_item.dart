@@ -63,7 +63,7 @@ class _ReactionsBoxItemState extends State<ReactionsBoxItem>
           child: GestureDetector(
             onHorizontalDragStart: (DragStartDetails dragStartDetail){
               _scaleController.forward();
-              SoundUtility.playSound('icon_focus.mp3');
+              //SoundUtility.playSound('icon_focus.mp3');
               setState(() {
                 SoundUtility.reactionId=widget.reaction.id;
                 _iconInFocus=true;
@@ -71,7 +71,7 @@ class _ReactionsBoxItemState extends State<ReactionsBoxItem>
             },
             onHorizontalDragUpdate: (DragUpdateDetails dragUpdateDetail){
               _scaleController.forward();
-              SoundUtility.playSound('icon_focus.mp3');
+              //SoundUtility.playSound('icon_focus.mp3');
 
               setState(() {
                 SoundUtility.reactionId=widget.reaction.id;
@@ -81,21 +81,21 @@ class _ReactionsBoxItemState extends State<ReactionsBoxItem>
            onHorizontalDragCancel: (){
               setState(() {
                 _iconInFocus=false;
-                _scale=1;
+                //_scale=1;
                 SoundUtility.reactionId=0;
               });
             },
             onHorizontalDragEnd: (DragEndDetails dragEndDetail){
               setState(() {
                 _iconInFocus=false;
-                _scale=1;
+                //_scale=1;
                 SoundUtility.reactionId=0;
               });
             },
             onHorizontalDragDown: (DragDownDetails dragDownDetail){
               setState(() {
                 _iconInFocus=false;
-                _scale=1;
+                //_scale=1;
                 SoundUtility.reactionId=0;
               });
             },
@@ -138,6 +138,7 @@ class _ReactionsBoxItemState extends State<ReactionsBoxItem>
             },
             //splashColor: widget.splashColor,
             //highlightColor: widget.highlightColor,
+            child:Container(
             child: Column(
                 children: <Widget>[
             _iconInFocus && SoundUtility.reactionId==widget.reaction.id?
@@ -153,7 +154,11 @@ class _ReactionsBoxItemState extends State<ReactionsBoxItem>
               margin: EdgeInsets.only(bottom: 8.0),
             ):Container(),
             widget.reaction.previewIcon,
+
              ]),
+                //push focus icon above
+                margin: _iconInFocus && SoundUtility.reactionId==widget.reaction.id?EdgeInsets.only(bottom:13):EdgeInsets.only(bottom:0),
+            ),
 
           ),
         ),

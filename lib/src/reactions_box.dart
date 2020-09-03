@@ -109,7 +109,7 @@ class _ReactionsBoxState extends State<ReactionsBox>
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(widget.radius)),
                       child: Padding(
-                        padding: EdgeInsets.only(left:8.0, right:8.0, bottom:7),
+                        padding: EdgeInsets.only(left:8.0, right:8.0),
 
                       child: Wrap(
                         children: widget.reactions
@@ -129,9 +129,11 @@ class _ReactionsBoxState extends State<ReactionsBox>
                                 highlightColor: widget.highlightColor,
                                 reaction: reaction,
                               ),
+
                             )
                             .toList(),
-                      )),
+                      )
+                      ),
                     ),
                   ),
                     //SizedBox(height:14)
