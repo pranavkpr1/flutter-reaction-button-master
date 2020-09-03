@@ -61,6 +61,13 @@ class _ReactionsBoxItemState extends State<ReactionsBoxItem>
         child: Transform.scale(
           scale: _scale,
           child: GestureDetector(
+            onHorizontalDragStart: (DragStartDetails dragStartDetail){
+              _scaleController.forward();
+              SoundUtility.playSound('icon_focus.mp3');
+              setState(() {
+                _iconInFocus=true;
+              });
+            },
             onHorizontalDragUpdate: (DragUpdateDetails dragUpdateDetail){
               _scaleController.forward();
               SoundUtility.playSound('icon_focus.mp3');
@@ -68,13 +75,24 @@ class _ReactionsBoxItemState extends State<ReactionsBoxItem>
                 _iconInFocus=true;
               });
             },
-           /* onHorizontalDragStart: (DragStartDetails dragUpdateDetail){
-              _scaleController.forward();
-              SoundUtility.playSound('icon_focus.mp3');
+           onHorizontalDragCancel: (){
               setState(() {
-                _iconInFocus=true;
+                _iconInFocus=false;
+                _scale=1;
               });
-            },*/
+            },
+            onHorizontalDragEnd: (DragEndDetails dragEndDetail){
+              setState(() {
+                _iconInFocus=false;
+                _scale=1;
+              });
+            },
+            onHorizontalDragDown: (DragDownDetails dragDownDetail){
+              setState(() {
+                _iconInFocus=false;
+                _scale=1;
+              });
+            },
             onTap: () {
               _scaleController.reverse();
               setState(() {
