@@ -1,7 +1,7 @@
 import 'package:audioplayers/audio_cache.dart';
 
 class SoundService{
-
+  int reactionId=0;
   AudioCache audioCache = new AudioCache();
   Future playSound(String nameSound) async {
     await audioCache.play('sounds/$nameSound');

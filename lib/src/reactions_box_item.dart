@@ -59,19 +59,22 @@ class _ReactionsBoxItemState extends State<ReactionsBoxItem>
   Widget build(BuildContext context) => IgnorePointer(
         ignoring: !widget.reaction.enabled,
         child: Transform.scale(
-          scale: _scale,
+          scale: SoundUtility.reactionId==widget.reaction.id?_scale:1,
           child: GestureDetector(
             onHorizontalDragStart: (DragStartDetails dragStartDetail){
               _scaleController.forward();
               SoundUtility.playSound('icon_focus.mp3');
               setState(() {
+                SoundUtility.reactionId=widget.reaction.id;
                 _iconInFocus=true;
               });
             },
             onHorizontalDragUpdate: (DragUpdateDetails dragUpdateDetail){
               _scaleController.forward();
               SoundUtility.playSound('icon_focus.mp3');
+
               setState(() {
+                SoundUtility.reactionId=widget.reaction.id;
                 _iconInFocus=true;
               });
             },
@@ -79,18 +82,21 @@ class _ReactionsBoxItemState extends State<ReactionsBoxItem>
               setState(() {
                 _iconInFocus=false;
                 _scale=1;
+                SoundUtility.reactionId=0;
               });
             },
             onHorizontalDragEnd: (DragEndDetails dragEndDetail){
               setState(() {
                 _iconInFocus=false;
                 _scale=1;
+                SoundUtility.reactionId=0;
               });
             },
             onHorizontalDragDown: (DragDownDetails dragDownDetail){
               setState(() {
                 _iconInFocus=false;
                 _scale=1;
+                SoundUtility.reactionId=0;
               });
             },
             onTap: () {
@@ -134,7 +140,7 @@ class _ReactionsBoxItemState extends State<ReactionsBoxItem>
             //highlightColor: widget.highlightColor,
             child: Column(
                 children: <Widget>[
-            _iconInFocus?
+            _iconInFocus && SoundUtility.reactionId==widget.reaction.id?
             Container(
               child: Text(
                   widget.reaction.reactionText,
