@@ -164,7 +164,7 @@ class _ReactionsBoxItemState extends State<ReactionsBoxItem>
               width: 40.0,
               //height:  _iconInFocus && SoundUtility.reactionId==widget.reaction.id ? 100.0 : 40.0,
                 //push focus icon above
-                margin: _iconInFocus && SoundUtility.reactionId==widget.reaction.id?EdgeInsets.only(bottom:56):EdgeInsets.only(bottom:0),
+                margin: _iconInFocus && SoundUtility.reactionId==widget.reaction.id && widget.reaction.id!=0?EdgeInsets.only(bottom:75):SoundUtility.reactionId==0?EdgeInsets.only(bottom:0):EdgeInsets.only(bottom:40),
             ),
 
           ),
