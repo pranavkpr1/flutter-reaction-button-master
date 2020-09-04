@@ -161,10 +161,10 @@ class _ReactionsBoxItemState extends State<ReactionsBoxItem>
             widget.reaction.previewIcon,
 
              ]),
-              //width: 40.0,
+              width: 40.0,
               //height:  _iconInFocus && SoundUtility.reactionId==widget.reaction.id ? 100.0 : 40.0,
                 //push focus icon above
-                margin: _iconInFocus && SoundUtility.reactionId==widget.reaction.id?EdgeInsets.only(bottom:35):EdgeInsets.only(bottom:0),
+                margin: _iconInFocus && SoundUtility.reactionId==widget.reaction.id?EdgeInsets.only(bottom:56):EdgeInsets.only(bottom:0),
             ),
 
           ),
