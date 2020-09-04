@@ -110,7 +110,7 @@ class _ReactionsBoxState extends State<ReactionsBox>
                     if (dragUpdateDetail.globalPosition.dy >=
                         _yStartBox &&
                         dragUpdateDetail.globalPosition.dy <=
-                            _yStartBox+70) {
+                            _yStartBox+80) {
                       if (dragUpdateDetail.globalPosition.dx >=
                           _xStartBox -7 &&
                           dragUpdateDetail.globalPosition.dx <
@@ -182,7 +182,7 @@ class _ReactionsBoxState extends State<ReactionsBox>
                   child: Stack(children: <Widget>[
                     Container(
                         height: 50,
-                        width: 220,
+                        width: 230,
                         decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(widget.radius),
@@ -202,7 +202,7 @@ class _ReactionsBoxState extends State<ReactionsBox>
                         )),
                     Container(
                       //height: 50,
-                        width: 220,
+                        width: 230,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.center,
@@ -229,42 +229,6 @@ class _ReactionsBoxState extends State<ReactionsBox>
                         )
                     )
 
-                    /* Transform.scale(
-                    scale: _scale,
-                    child: Card(
-                      color: widget.color,
-                      elevation: widget.elevation,
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(widget.radius)),
-                      child: Padding(
-                        padding: EdgeInsets.only(left:8.0, right:8.0),
-
-                      child: Wrap(
-                        children: widget.reactions
-                            .map(
-                              (reaction) => ReactionsBoxItem(
-                                onReactionClick: (reaction) {
-
-                                  SoundUtility.playSound('icon_choose.mp3');
-
-                                  if(reaction.reactionSoundEffect)
-                                    SoundUtility.playSound('bell.mp3');
-
-                                  _selectedReaction = reaction;
-                                  _scaleController.reverse();
-                                },
-                                splashColor: widget.splashColor,
-                                highlightColor: widget.highlightColor,
-                                reaction: reaction,
-                              ),
-
-                            )
-                            .toList(),
-                      )
-                      ),
-                    ),
-                  ),*/
-                    //SizedBox(height:14)
                   ])
               ),
             ),
