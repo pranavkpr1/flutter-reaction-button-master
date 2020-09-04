@@ -40,7 +40,7 @@ class _ReactionsBoxItemState extends State<ReactionsBoxItem>
     _scaleController =
         AnimationController(vsync: this, duration: Duration(milliseconds: 100));
 
-    final Tween<double> startTween = Tween(begin: 1, end: 2);
+    final Tween<double> startTween = Tween(begin: 1, end: 1.8);
     _scaleAnimation = startTween.animate(_scaleController)
       ..addListener(() {
         setState(() {
@@ -164,7 +164,7 @@ class _ReactionsBoxItemState extends State<ReactionsBoxItem>
               //width: 40.0,
               //height:  _iconInFocus && SoundUtility.reactionId==widget.reaction.id ? 100.0 : 40.0,
                 //push focus icon above
-               // margin: _iconInFocus && SoundUtility.reactionId==widget.reaction.id?EdgeInsets.only(bottom:14):EdgeInsets.only(bottom:0),
+                margin: _iconInFocus && SoundUtility.reactionId==widget.reaction.id?EdgeInsets.only(bottom:35):EdgeInsets.only(bottom:0),
             ),
 
           ),

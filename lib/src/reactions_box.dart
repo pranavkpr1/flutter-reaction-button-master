@@ -117,7 +117,7 @@ class _ReactionsBoxState extends State<ReactionsBox>
                         ],
                       ),
                       child: Padding(
-                          padding: EdgeInsets.only(left:8.0, right:8.0),
+                          padding: EdgeInsets.only(left:15.0, right:8.0),
                       )),
                     Container(
                         //height: 50,
