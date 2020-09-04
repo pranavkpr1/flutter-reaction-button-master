@@ -120,7 +120,7 @@ class _ReactionsBoxState extends State<ReactionsBox>
                           padding: EdgeInsets.only(left:8.0, right:8.0),
                       )),
                     Container(
-                        height: 50,
+                        //height: 50,
                         width:230,
                            child:Row(
                               children:widget.reactions
