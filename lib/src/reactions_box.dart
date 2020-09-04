@@ -85,68 +85,135 @@ class _ReactionsBoxState extends State<ReactionsBox>
   }
 
   @override
-  Widget build(BuildContext context) => GestureDetector(
-        // Hide box when clicking out
-        onTap: () {
-          _scaleController.reverse();
-        SoundUtility.playSound('box_down.mp3');},
-        child: Container(
-          height: double.infinity,
-          color: Colors.transparent,
-          child: Stack(
-            alignment: Alignment.center,
-            children: <Widget>[
-              Positioned(
-                top: _getYPosition(context),
-                left:_getXPosition(),
-                child: GestureDetector(
+  Widget build(BuildContext context) {
+    double _yStartBox=_getYPosition(context);
+    double _xStartBox=_getXPosition();
+    return GestureDetector(
+      // Hide box when clicking out
+      onTap: () {
+        _scaleController.reverse();
+        SoundUtility.playSound('box_down.mp3');
+      },
+      child: Container(
+        height: double.infinity,
+        color: Colors.transparent,
+        child: Stack(
+          alignment: Alignment.center,
+          children: <Widget>[
+            Positioned(
+              top: _yStartBox,
+              left: _xStartBox,
+              child: GestureDetector(
+                  onHorizontalDragUpdate: (DragUpdateDetails dragUpdateDetail) {
+                    //_scaleController.forward();
+
+                    if (dragUpdateDetail.globalPosition.dy >=
+                        _yStartBox &&
+                        dragUpdateDetail.globalPosition.dy <=
+                            _yStartBox+50) {
+                      if (dragUpdateDetail.globalPosition.dx >=
+                          _xStartBox &&
+                          dragUpdateDetail.globalPosition.dx <
+                              _xStartBox + 40) {
+                        setState(() {
+                          SoundUtility.reactionId = 1;
+                        });
+                      } else if (dragUpdateDetail.globalPosition.dx >=
+                          _xStartBox + 40 &&
+                          dragUpdateDetail.globalPosition.dx <
+                              _xStartBox + 80) {
+                        setState(() {
+                          SoundUtility.reactionId = 2;
+                        });
+                      }
+                      else if (dragUpdateDetail.globalPosition.dx >=
+                          _xStartBox + 80 &&
+                          dragUpdateDetail.globalPosition.dx <
+                              _xStartBox + 120) {
+                        setState(() {
+                          SoundUtility.reactionId = 3;
+                        });
+                      }
+                      else if (dragUpdateDetail.globalPosition.dx >=
+                          _xStartBox + 120 &&
+                          dragUpdateDetail.globalPosition.dx <
+                              _xStartBox + 160) {
+                        setState(() {
+                          SoundUtility.reactionId = 4;
+                        });
+                      }
+                      else if (dragUpdateDetail.globalPosition.dx >=
+                          _xStartBox + 160 &&
+                          dragUpdateDetail.globalPosition.dx <
+                              _xStartBox + 200) {
+                        setState(() {
+                          SoundUtility.reactionId = 5;
+                        });
+                      }
+                      else {
+                        setState(() {
+                          SoundUtility.reactionId = 0;
+                        });
+                      }
+                    }
+                  },
+                  onHorizontalDragEnd: (DragEndDetails dragEndDetail) {
+                    //_scaleController.reverse();
+                    setState(() {
+                      SoundUtility.reactionId = 0;
+                    });
+                  },
                   child: Stack(children: <Widget>[
                     Container(
-                      height: 50,
-                      width:250,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(widget.radius),
-                        border: Border.all(color: Colors.grey[300], width: 0.3),
-                        boxShadow: [
-                          BoxShadow(
-                              color: Colors.grey,
-                              blurRadius: 5.0,
-                              // LTRB
-                              offset: Offset.lerp(Offset(0.0, 0.0), Offset(0.0, 0.5), 10.0)),
-                        ],
-                      ),
-                      child: Padding(
-                          padding: EdgeInsets.only(left:30.0, right:10.0),
-                      )),
+                        height: 50,
+                        width: 220,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(widget.radius),
+                          border: Border.all(
+                              color: Colors.grey[300], width: 0.3),
+                          boxShadow: [
+                            BoxShadow(
+                                color: Colors.grey,
+                                blurRadius: 5.0,
+                                // LTRB
+                                offset: Offset.lerp(
+                                    Offset(0.0, 0.0), Offset(0.0, 0.5), 10.0)),
+                          ],
+                        ),
+                        child: Padding(
+                          padding: EdgeInsets.only(left: 0.0, right: 0.0),
+                        )),
                     Container(
-                        //height: 50,
-                        width:250,
-                           child:Row(
-                              children:widget.reactions
-                                .map(
-                                  (reaction) => ReactionsBoxItem(
-                                onReactionClick: (reaction) {
+                      //height: 50,
+                        width: 220,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: widget.reactions
+                              .map(
+                                (reaction) =>
+                                ReactionsBoxItem(
+                                  onReactionClick: (reaction) {
+                                    SoundUtility.playSound('icon_choose.mp3');
 
-                                  SoundUtility.playSound('icon_choose.mp3');
+                                    if (reaction.reactionSoundEffect)
+                                      SoundUtility.playSound('bell.mp3');
 
-                                  if(reaction.reactionSoundEffect)
-                                    SoundUtility.playSound('bell.mp3');
+                                    _selectedReaction = reaction;
+                                    _scaleController.reverse();
+                                  },
+                                  splashColor: widget.splashColor,
+                                  highlightColor: widget.highlightColor,
+                                  reaction: reaction,
+                                ),
 
-                                  _selectedReaction = reaction;
-                                  _scaleController.reverse();
-                                },
-                                splashColor: widget.splashColor,
-                                highlightColor: widget.highlightColor,
-                                reaction: reaction,
-                              ),
-
-                            )
-                                .toList(),
                           )
+                              .toList(),
+                        )
                     )
 
-                   /* Transform.scale(
+                    /* Transform.scale(
                     scale: _scale,
                     child: Card(
                       color: widget.color,
@@ -183,27 +250,29 @@ class _ReactionsBoxState extends State<ReactionsBox>
                   ),*/
                     //SizedBox(height:14)
                   ])
-                ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
-      );
+      ),
+    );
+  }
 
-  double _getXPosition() => widget.buttonOffset.dx+widget.buttonSize.width-20;
+    double _getXPosition() => widget.buttonOffset.dx+widget.buttonSize.width-20;
 
-  double _getYPosition(BuildContext context) =>
-      (_getTopPosition() - widget.buttonSize.height * 3 < 0)
-          ? _getBottomPosition()
-          : (_getBottomPosition() + widget.buttonSize.height * 2 > context.getScreenSize().height)
-              ? _getTopPosition()
-              : widget.position == Position.TOP
-                  ? _getTopPosition()
-                  : _getBottomPosition();
+    double _getYPosition(BuildContext context) =>
+        (_getTopPosition() - widget.buttonSize.height * 3 < 0)
+            ? _getBottomPosition()
+            : (_getBottomPosition() + widget.buttonSize.height * 2 > context.getScreenSize().height)
+            ? _getTopPosition()
+            : widget.position == Position.TOP
+            ? _getTopPosition()
+            : _getBottomPosition();
 
-  double _getTopPosition() =>
-      widget.buttonOffset.dy- widget.buttonSize.height;
+    double _getTopPosition() =>
+        widget.buttonOffset.dy- widget.buttonSize.height;
 
-  double _getBottomPosition() =>
-      widget.buttonOffset.dy + widget.buttonSize.height;
-}
+    double _getBottomPosition() =>
+        widget.buttonOffset.dy + widget.buttonSize.height;
+  }
+

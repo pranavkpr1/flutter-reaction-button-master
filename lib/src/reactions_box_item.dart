@@ -56,17 +56,21 @@ class _ReactionsBoxItemState extends State<ReactionsBoxItem>
   }
 
   @override
-  Widget build(BuildContext context) => IgnorePointer(
-        ignoring: !widget.reaction.enabled,
-        child: Transform.scale(
-          scale: SoundUtility.reactionId==widget.reaction.id?_scale:1,
-          child: GestureDetector(
-            onHorizontalDragStart: (DragStartDetails dragStartDetail){
+  Widget build(BuildContext context) {
+    if(SoundUtility.reactionId == widget.reaction.id)
+    _scaleController.forward();
+
+    return IgnorePointer(
+      ignoring: !widget.reaction.enabled,
+      child: Transform.scale(
+        scale: SoundUtility.reactionId == widget.reaction.id ? _scale : 1,
+        child: GestureDetector(
+          /*onHorizontalDragStart: (DragStartDetails dragStartDetail){
               _scaleController.forward();
               //SoundUtility.playSound('icon_focus.mp3');
               setState(() {
                 SoundUtility.reactionId=widget.reaction.id;
-                _iconInFocus=true;
+                //_iconInFocus=true;
               });
             },
             onHorizontalDragUpdate: (DragUpdateDetails dragUpdateDetail){
@@ -75,13 +79,13 @@ class _ReactionsBoxItemState extends State<ReactionsBoxItem>
 
               setState(() {
                 SoundUtility.reactionId=widget.reaction.id;
-                _iconInFocus=true;
+                //_iconInFocus=true;
               });
             },
            onHorizontalDragCancel: (){
               _scaleController.reverse();
               setState(() {
-                _iconInFocus=false;
+                //_iconInFocus=false;
                 //_scale=1;
                 SoundUtility.reactionId=0;
               });
@@ -89,7 +93,7 @@ class _ReactionsBoxItemState extends State<ReactionsBoxItem>
             onHorizontalDragEnd: (DragEndDetails dragEndDetail){
               _scaleController.reverse();
               setState(() {
-                _iconInFocus=false;
+                //_iconInFocus=false;
                 //_scale=1;
                 SoundUtility.reactionId=0;
               });
@@ -97,77 +101,66 @@ class _ReactionsBoxItemState extends State<ReactionsBoxItem>
             onHorizontalDragDown: (DragDownDetails dragDownDetail){
               _scaleController.reverse();
               setState(() {
-                _iconInFocus=false;
+                //_iconInFocus=false;
                 //_scale=1;
                 SoundUtility.reactionId=0;
               });
-            },
-            onTap: () {
-              _scaleController.forward();
-              setState(() {
-                _iconInFocus=true;
-              });
-              widget.onReactionClick(widget.reaction);
-            },
-
-            /*onHover:(value){
-              if(value) {
-                _scaleController.forward();
-                SoundUtility.playSound('icon_focus.mp3');
-                setState(() {
-                  _iconInFocus=true;
-                });
-              }
             },*/
-           /* onFocusChange: (value){
-              _scaleController.forward();
-              SoundUtility.playSound('icon_focus.mp3');
-              setState(() {
-                _iconInFocus=true;
-              });
-            },*/
+          onTap: () {
+            _scaleController.forward();
+            setState(() {
+              SoundUtility.reactionId = 0;
+            });
+            widget.onReactionClick(widget.reaction);
+          },
 
-            onTapDown: (_) {
-              setState(() {
-                _iconInFocus=false;
-              });
-              _scaleController.reverse();
-            },
-            onTapCancel: () {
-              setState(() {
-                _iconInFocus=false;
-              });
-              _scaleController.reverse();
-            },
-            //splashColor: widget.splashColor,
-            //highlightColor: widget.highlightColor,
-            child:Container(
+
+          onTapDown: (_) {
+            setState(() {
+              SoundUtility.reactionId = 0;
+            });
+            _scaleController.reverse();
+          },
+          onTapCancel: () {
+            setState(() {
+              SoundUtility.reactionId = 0;
+            });
+            _scaleController.reverse();
+          },
+          //splashColor: widget.splashColor,
+          //highlightColor: widget.highlightColor,
+          child: Container(
             child: Column(
                 children: <Widget>[
-            _iconInFocus && SoundUtility.reactionId==widget.reaction.id?
-            Container(
-              child:Material(
-                  type: MaterialType.transparency,
-              child: Text(
-                  widget.reaction.reactionText,
-                  style: TextStyle(fontSize: 8.0, color: Colors.white),
-                  maxLines:1
-              )),
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10.0), color: Colors.black.withOpacity(0.3)),
-              padding: EdgeInsets.only(left: 7.0, right: 7.0, top: 2.0, bottom: 2.0),
-              margin: EdgeInsets.only(bottom: 8.0),
-            ):Container(),
-            widget.reaction.previewIcon,
+                  SoundUtility.reactionId == widget.reaction.id ?
+                  Container(
+                    child: Material(
+                        type: MaterialType.transparency,
+                        child: Text(
+                            widget.reaction.reactionText,
+                            style: TextStyle(
+                                fontSize: 8.0, color: Colors.white),
+                            maxLines: 1
+                        )),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10.0),
+                        color: Colors.black.withOpacity(0.3)),
+                    padding: EdgeInsets.only(
+                        left: 7.0, right: 7.0, top: 2.0, bottom: 2.0),
+                    margin: EdgeInsets.only(bottom: 8.0),
+                  ) : Container(),
+                  widget.reaction.previewIcon,
 
-             ]),
-              width: 40.0,
-              //height:  _iconInFocus && SoundUtility.reactionId==widget.reaction.id ? 100.0 : 40.0,
-                //push focus icon above
-                margin: _iconInFocus && SoundUtility.reactionId==widget.reaction.id && widget.reaction.id!=0?EdgeInsets.only(bottom:75):SoundUtility.reactionId==0?EdgeInsets.only(bottom:0):EdgeInsets.only(bottom:40),
-            ),
-
+                ]),
+            width: 40.0,
+            //height:  _iconInFocus && SoundUtility.reactionId==widget.reaction.id ? 100.0 : 40.0,
+            //push focus icon above
+            margin: SoundUtility.reactionId == widget.reaction.id ? EdgeInsets
+                .only(bottom: 80) : EdgeInsets.only(bottom: 0),
           ),
+
         ),
-      );
+      ),
+    );
+  }
 }
