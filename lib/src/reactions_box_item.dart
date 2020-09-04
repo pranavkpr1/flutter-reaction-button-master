@@ -64,7 +64,7 @@ class _ReactionsBoxItemState extends State<ReactionsBoxItem>
       ignoring: !widget.reaction.enabled,
       child: Transform.scale(
         scale: SoundUtility.reactionId == widget.reaction.id ? _scale : 1,
-        child: InkWell(
+        child: GestureDetector(
 
           onTap: () {
             _scaleController.reverse();
@@ -86,8 +86,8 @@ class _ReactionsBoxItemState extends State<ReactionsBoxItem>
             });
             _scaleController.reverse();
           },
-          splashColor: widget.splashColor,
-          highlightColor: widget.highlightColor,
+          //splashColor: widget.splashColor,
+          //highlightColor: widget.highlightColor,
           child: Container(
             child: Column(
                 children: <Widget>[
