@@ -100,8 +100,10 @@ class _ReactionsBoxState extends State<ReactionsBox>
                 top: _getYPosition(context),
                 left:_getXPosition(),
                 child: GestureDetector(
-                  child: Column(children: <Widget>[
+                  child: Stack(children: <Widget>[
                     Container(
+                      height: 50,
+                      width:300,
                       decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(widget.radius),
@@ -116,9 +118,12 @@ class _ReactionsBoxState extends State<ReactionsBox>
                       ),
                       child: Padding(
                           padding: EdgeInsets.only(left:8.0, right:8.0),
-
-                          child: Wrap(
-                            children: widget.reactions
+                      )),
+                    Container(
+                        height: 120,
+                        width:300,
+                           child:Row(
+                              children:widget.reactions
                                 .map(
                                   (reaction) => ReactionsBoxItem(
                                 onReactionClick: (reaction) {
@@ -138,11 +143,9 @@ class _ReactionsBoxState extends State<ReactionsBox>
 
                             )
                                 .toList(),
-                          )),
-                      height: 60,
-                      width:300,
-
+                          )
                     )
+
                    /* Transform.scale(
                     scale: _scale,
                     child: Card(
