@@ -103,7 +103,7 @@ class _ReactionsBoxState extends State<ReactionsBox>
                   child: Stack(children: <Widget>[
                     Container(
                       height: 50,
-                      width:300,
+                      width:230,
                       decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(widget.radius),
@@ -120,8 +120,8 @@ class _ReactionsBoxState extends State<ReactionsBox>
                           padding: EdgeInsets.only(left:8.0, right:8.0),
                       )),
                     Container(
-                        height: 120,
-                        width:300,
+                        height: 50,
+                        width:230,
                            child:Row(
                               children:widget.reactions
                                 .map(

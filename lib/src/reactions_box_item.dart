@@ -146,11 +146,13 @@ class _ReactionsBoxItemState extends State<ReactionsBoxItem>
                 children: <Widget>[
             _iconInFocus && SoundUtility.reactionId==widget.reaction.id?
             Container(
+              child:Material(
+                  type: MaterialType.transparency,
               child: Text(
                   widget.reaction.reactionText,
                   style: TextStyle(fontSize: 8.0, color: Colors.white),
                   maxLines:1
-              ),
+              )),
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10.0), color: Colors.black.withOpacity(0.3)),
               padding: EdgeInsets.only(left: 7.0, right: 7.0, top: 2.0, bottom: 2.0),
@@ -159,8 +161,8 @@ class _ReactionsBoxItemState extends State<ReactionsBoxItem>
             widget.reaction.previewIcon,
 
              ]),
-              width: 40.0,
-              height:  _iconInFocus && SoundUtility.reactionId==widget.reaction.id ? 100.0 : 40.0,
+              //width: 40.0,
+              //height:  _iconInFocus && SoundUtility.reactionId==widget.reaction.id ? 100.0 : 40.0,
                 //push focus icon above
                // margin: _iconInFocus && SoundUtility.reactionId==widget.reaction.id?EdgeInsets.only(bottom:14):EdgeInsets.only(bottom:0),
             ),
