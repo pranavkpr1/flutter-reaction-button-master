@@ -110,11 +110,12 @@ class _ReactionsBoxState extends State<ReactionsBox>
                     if (dragUpdateDetail.globalPosition.dy >=
                         _yStartBox &&
                         dragUpdateDetail.globalPosition.dy <=
-                            _yStartBox+50) {
+                            _yStartBox+70) {
                       if (dragUpdateDetail.globalPosition.dx >=
-                          _xStartBox &&
+                          _xStartBox -7 &&
                           dragUpdateDetail.globalPosition.dx <
                               _xStartBox + 40) {
+                        SoundUtility.playSound("icon_focus.mp3");
                         setState(() {
                           SoundUtility.reactionId = 1;
                         });
@@ -122,6 +123,7 @@ class _ReactionsBoxState extends State<ReactionsBox>
                           _xStartBox + 40 &&
                           dragUpdateDetail.globalPosition.dx <
                               _xStartBox + 80) {
+                        SoundUtility.playSound("icon_focus.mp3");
                         setState(() {
                           SoundUtility.reactionId = 2;
                         });
@@ -130,6 +132,7 @@ class _ReactionsBoxState extends State<ReactionsBox>
                           _xStartBox + 80 &&
                           dragUpdateDetail.globalPosition.dx <
                               _xStartBox + 120) {
+                        SoundUtility.playSound("icon_focus.mp3");
                         setState(() {
                           SoundUtility.reactionId = 3;
                         });
@@ -138,6 +141,7 @@ class _ReactionsBoxState extends State<ReactionsBox>
                           _xStartBox + 120 &&
                           dragUpdateDetail.globalPosition.dx <
                               _xStartBox + 160) {
+                        SoundUtility.playSound("icon_focus.mp3");
                         setState(() {
                           SoundUtility.reactionId = 4;
                         });
@@ -146,6 +150,7 @@ class _ReactionsBoxState extends State<ReactionsBox>
                           _xStartBox + 160 &&
                           dragUpdateDetail.globalPosition.dx <
                               _xStartBox + 200) {
+                        SoundUtility.playSound("icon_focus.mp3");
                         setState(() {
                           SoundUtility.reactionId = 5;
                         });
@@ -158,11 +163,22 @@ class _ReactionsBoxState extends State<ReactionsBox>
                     }
                   },
                   onHorizontalDragEnd: (DragEndDetails dragEndDetail) {
-                    //_scaleController.reverse();
+
+                    SoundUtility.playSound('icon_choose.mp3');
+
+                    if (SoundUtility.reactionId==2)
+                      SoundUtility.playSound('bell.mp3');
+
+                    if(SoundUtility.reactionId>=1)
+                    _selectedReaction = widget.reactions.elementAt(SoundUtility.reactionId-1);
+
+                    _scaleController.reverse();
+
                     setState(() {
                       SoundUtility.reactionId = 0;
                     });
                   },
+
                   child: Stack(children: <Widget>[
                     Container(
                         height: 50,

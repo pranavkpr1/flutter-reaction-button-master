@@ -64,56 +64,15 @@ class _ReactionsBoxItemState extends State<ReactionsBoxItem>
       ignoring: !widget.reaction.enabled,
       child: Transform.scale(
         scale: SoundUtility.reactionId == widget.reaction.id ? _scale : 1,
-        child: GestureDetector(
-          /*onHorizontalDragStart: (DragStartDetails dragStartDetail){
-              _scaleController.forward();
-              //SoundUtility.playSound('icon_focus.mp3');
-              setState(() {
-                SoundUtility.reactionId=widget.reaction.id;
-                //_iconInFocus=true;
-              });
-            },
-            onHorizontalDragUpdate: (DragUpdateDetails dragUpdateDetail){
-              _scaleController.forward();
-              //SoundUtility.playSound('icon_focus.mp3');
+        child: InkWell(
 
-              setState(() {
-                SoundUtility.reactionId=widget.reaction.id;
-                //_iconInFocus=true;
-              });
-            },
-           onHorizontalDragCancel: (){
-              _scaleController.reverse();
-              setState(() {
-                //_iconInFocus=false;
-                //_scale=1;
-                SoundUtility.reactionId=0;
-              });
-            },
-            onHorizontalDragEnd: (DragEndDetails dragEndDetail){
-              _scaleController.reverse();
-              setState(() {
-                //_iconInFocus=false;
-                //_scale=1;
-                SoundUtility.reactionId=0;
-              });
-            },
-            onHorizontalDragDown: (DragDownDetails dragDownDetail){
-              _scaleController.reverse();
-              setState(() {
-                //_iconInFocus=false;
-                //_scale=1;
-                SoundUtility.reactionId=0;
-              });
-            },*/
           onTap: () {
-            _scaleController.forward();
+            _scaleController.reverse();
+            widget.onReactionClick(widget.reaction);
             setState(() {
               SoundUtility.reactionId = 0;
             });
-            widget.onReactionClick(widget.reaction);
           },
-
 
           onTapDown: (_) {
             setState(() {
@@ -127,8 +86,8 @@ class _ReactionsBoxItemState extends State<ReactionsBoxItem>
             });
             _scaleController.reverse();
           },
-          //splashColor: widget.splashColor,
-          //highlightColor: widget.highlightColor,
+          splashColor: widget.splashColor,
+          highlightColor: widget.highlightColor,
           child: Container(
             child: Column(
                 children: <Widget>[
@@ -155,8 +114,7 @@ class _ReactionsBoxItemState extends State<ReactionsBoxItem>
             width: 40.0,
             //height:  _iconInFocus && SoundUtility.reactionId==widget.reaction.id ? 100.0 : 40.0,
             //push focus icon above
-            margin: SoundUtility.reactionId == widget.reaction.id ? EdgeInsets
-                .only(bottom: 80) : EdgeInsets.only(bottom: 0),
+            padding: SoundUtility.reactionId == widget.reaction.id ? EdgeInsets.only(bottom: 80) : EdgeInsets.only(bottom: 0),
           ),
 
         ),
