@@ -105,7 +105,8 @@ class _FlutterReactionButtonCheckState
               Transform.rotate(
                   child:(_selectedReaction ?? widget.reactions[0]).icon,
                   angle: rotationIcon(rotateSelectedIcon.value)
-              ):(_selectedReaction ?? widget.reactions[0]).icon,
+              ):
+              (_selectedReaction ?? widget.reactions[0]).icon,
                 Text(" "+(_selectedReaction ?? widget.reactions[0]).reactionText)
            ],
       ));
@@ -170,10 +171,7 @@ class _FlutterReactionButtonCheckState
     widget.onReactionChanged(reaction, _isChecked);
     setState(() {
 
-      if(reaction.id!=_selectedReaction.id)
-        _iconChange=true;
-      else
-        _iconChange=false;
+        _iconChange=true; //on tap or drag stop on some icon
 
       _selectedReaction = reaction;
     });
