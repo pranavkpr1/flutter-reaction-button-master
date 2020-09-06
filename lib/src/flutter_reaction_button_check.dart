@@ -59,7 +59,7 @@ class FlutterReactionButtonCheck extends StatefulWidget {
 }
 
 class _FlutterReactionButtonCheckState
-    extends State<FlutterReactionButtonCheck> {
+    extends State<FlutterReactionButtonCheck> with TickerProviderStateMixin{
   final GlobalKey _buttonKey = GlobalKey();
 
   final int _maxTick = 2;
@@ -69,13 +69,22 @@ class _FlutterReactionButtonCheckState
   Reaction _selectedReaction;
 
   bool _isChecked = false;
+  Animation rotateSelectedIcon;
+  bool _iconChange=false;
+  AnimationController animControlRotateSelectedIcon;
 
   _FlutterReactionButtonCheckState();
 
   @override
   void initState() {
     super.initState();
+    animControlRotateSelectedIcon =
+        AnimationController(vsync: this, duration: Duration(milliseconds: 500));
+    rotateSelectedIcon = Tween(begin: 0.0, end: 0.8).animate(animControlRotateSelectedIcon);
     _selectedReaction = widget.initialReaction;
+    rotateSelectedIcon.addListener(() {
+      setState(() {});
+    });
   }
 
   @override
@@ -92,7 +101,11 @@ class _FlutterReactionButtonCheckState
         },
         child: Row(
             children: <Widget>[
-              (_selectedReaction ?? widget.reactions[0]).icon,
+              _iconChange?
+              Transform.rotate(
+                  child:(_selectedReaction ?? widget.reactions[0]).icon,
+                  angle: rotationIcon(rotateSelectedIcon.value)
+              ):(_selectedReaction ?? widget.reactions[0]).icon,
                 Text(" "+(_selectedReaction ?? widget.reactions[0]).reactionText)
            ],
       ));
@@ -106,7 +119,15 @@ class _FlutterReactionButtonCheckState
       return _timer;
     });
   }
-
+  double rotationIcon(double value) {
+    if (value <= 0.2) {
+      return value;
+    } else if (value <= 0.6) {
+      return 0.4 - value;
+    } else {
+      return -(0.8 - value);
+    }
+  }
   void _onClickReactionButton() {
     _isChecked = !_isChecked;
     _updateReaction(
@@ -148,6 +169,12 @@ class _FlutterReactionButtonCheckState
     _isChecked = isSelectedFromDialog ? true : reaction != widget.initialReaction;
     widget.onReactionChanged(reaction, _isChecked);
     setState(() {
+
+      if(reaction.id!=_selectedReaction.id)
+        _iconChange=true;
+      else
+        _iconChange=false;
+
       _selectedReaction = reaction;
     });
   }
