@@ -104,7 +104,7 @@ class _FlutterReactionButtonCheckState
               _iconChange?
               Transform.rotate(
                   child:(_selectedReaction ?? widget.reactions[0]).icon,
-                  angle: rotationIcon(rotateSelectedIcon.value)
+                  angle:rotateSelectedIcon.value
               ):
               (_selectedReaction ?? widget.reactions[0]).icon,
                 Text(" "+(_selectedReaction ?? widget.reactions[0]).reactionText)
@@ -131,6 +131,7 @@ class _FlutterReactionButtonCheckState
   }
   void _onClickReactionButton() {
     _isChecked = !_isChecked;
+    _iconChange=false;
     _updateReaction(
       _isChecked
           ? (widget.selectedReaction ?? widget.reactions[0])
@@ -143,6 +144,8 @@ class _FlutterReactionButtonCheckState
     final buttonSize = _buttonKey.getButtonSize();
 
     SoundUtility.playSound('box_up.mp3');
+    _iconChange=false;
+
     final reactionButton = await Navigator.of(context).push(
       PageRouteBuilder(
         opaque: false,
